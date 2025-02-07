@@ -3,7 +3,9 @@ function validateName(name) {
 }
 
 function validatePhone(phone) {
-    return phone.length === 10 && typeof phone === 'number';
+    // return phone.length === 10 && !isNaN(phone);
+    if (phone.length !== 10) alert("Phone number must be 10 digits");
+    if(isNaN(phone)) alert("Phone number must be a number");
 }
 
 function validateEmail(email) {
@@ -28,15 +30,18 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
     // Validate Email
     if (!validateEmail(email)) {
         alert('Please enter a valid email');
+        return;
     }
 
     // Validate Name
     if (!validateName(name)) {
         alert('Please enter a valid name');
+        return;
     }
 
     // Validate Phone
-    if (!validatePhone(phone)) {
-        alert('Please enter a valid phone number');
-    }
+    validatePhone(phone);
+    
+    alert('Thank you for your message!');
+    this.reset();
 });
